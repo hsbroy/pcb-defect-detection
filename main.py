@@ -20,7 +20,7 @@ import aoi.detect as detect
 
 # 專案根目錄（main.py 就在根目錄，所以只需要一個 .parent）
 BASE_DIR = Path(__file__).resolve().parent
-OUT_DIR = BASE_DIR / "results" / "main_test"          # results/ 已被 .gitignore 排除
+OUT_DIR = BASE_DIR / "results" / "self" / "main_test"          # results/ 已被 .gitignore 排除
 
 # ---- 資料夾（只用非旋轉的 PCB 01 圖，尺寸皆為 1586x3034，不需要對位） ----
 open_circuit_path = BASE_DIR / "dataset" / "Open_circuit" / "Open_circuit"
