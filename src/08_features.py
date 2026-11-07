@@ -1,11 +1,14 @@
 from pathlib import Path
 
 import cv2
+
+import cv_io
 import numpy as np
 import pandas as pd
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-CLEAN_MASK_DIR = BASE_DIR / "results" / "morphology" / "cleaned_masks"
+# Reads the cleaned masks of the original setting (kernel 5x5).
+CLEAN_MASK_DIR = BASE_DIR / "results" / "kernel_size5" / "cleaned_masks"
 FEATURES_CSV_PATH = BASE_DIR / "results" / "features.csv"
 SUMMARY_CSV_PATH = BASE_DIR / "results" / "feature_summary.csv"
 SUPPORTED_IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff"}
@@ -152,7 +155,7 @@ def main():
             "inspection_status": "SUCCESS",
             "error": "",
         }
-        mask = cv2.imread(str(mask_path), cv2.IMREAD_GRAYSCALE)
+        mask = cv_io.imread(str(mask_path), cv2.IMREAD_GRAYSCALE)
         if mask is None:
             summary["inspection_status"] = "ERROR"
             summary["error"] = f"Could not read cleaned mask: {mask_path}"

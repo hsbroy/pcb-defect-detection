@@ -1,14 +1,20 @@
+import sys
 from pathlib import Path
 
 import cv2
+
+import cv_io
 import numpy as np
 import pandas as pd
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-CLEAN_MASK_DIR = BASE_DIR / "results" / "morphology" / "cleaned_masks"
-OUTPUT_DIR = BASE_DIR / "results" / "components" / "labeled_masks"
-DETAILS_CSV_PATH = BASE_DIR / "results" / "component_details.csv"
-SUMMARY_CSV_PATH = BASE_DIR / "results" / "component_summary.csv"
+# Usage: python src/07_components.py [kernel_size]   (default 5 = original setting)
+KERNEL_SIZE = int(sys.argv[1]) if len(sys.argv) > 1 else 5
+RESULT_DIR = BASE_DIR / "results" / f"kernel_size{KERNEL_SIZE}"
+CLEAN_MASK_DIR = RESULT_DIR / "cleaned_masks"
+OUTPUT_DIR = RESULT_DIR / "components" / "labeled_masks"
+DETAILS_CSV_PATH = RESULT_DIR / "component_details.csv"
+SUMMARY_CSV_PATH = RESULT_DIR / "component_summary.csv"
 SUPPORTED_IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff"}
 DETAIL_COLUMNS = [
     "image_name",
@@ -119,7 +125,7 @@ def main():
             "error": "",
         }
 
-        mask = cv2.imread(str(mask_path), cv2.IMREAD_GRAYSCALE)
+        mask = cv_io.imread(str(mask_path), cv2.IMREAD_GRAYSCALE)
         if mask is None:
             summary["inspection_status"] = "ERROR"
             summary["error"] = f"Could not read mask: {mask_path}"
@@ -130,7 +136,7 @@ def main():
         labeled_image, components = analyze_components(mask)
         output_path = OUTPUT_DIR / relative_mask_path.with_suffix(".png")
         output_path.parent.mkdir(parents=True, exist_ok=True)
-        if not cv2.imwrite(str(output_path), labeled_image):
+        if not cv_io.imwrite(str(output_path), labeled_image):
             summary["inspection_status"] = "ERROR"
             summary["error"] = f"Could not save component image: {output_path}"
             failures.append(summary["error"])

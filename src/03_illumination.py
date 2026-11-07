@@ -2,9 +2,11 @@ from pathlib import Path
 
 import cv2
 
+import cv_io
+
 # Resolve input and output locations relative to the project root.
 BASE_DIR = Path(__file__).resolve().parent.parent
-DATASET_DIR = BASE_DIR / "Final Dataset"
+DATASET_DIR = BASE_DIR / "dataset"
 PROCESSED_DIR = BASE_DIR / "results" / "illumination_processed_images"
 SUPPORTED_IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff"}
 
@@ -35,7 +37,7 @@ def main():
     processed_count = 0
     for image_path in image_paths:
         relative_path = image_path.relative_to(DATASET_DIR)
-        image = cv2.imread(str(image_path), cv2.IMREAD_COLOR)
+        image = cv_io.imread(str(image_path), cv2.IMREAD_COLOR)
         if image is None:
             failures.append(f"Could not read image: {image_path}")
             continue
@@ -44,7 +46,7 @@ def main():
         for stage, processed in (("corrected", corrected), ("clahe_enhanced", enhanced)):
             output_path = PROCESSED_DIR / stage / relative_path
             output_path.parent.mkdir(parents=True, exist_ok=True)
-            if not cv2.imwrite(str(output_path), processed):
+            if not cv_io.imwrite(str(output_path), processed):
                 failures.append(f"Could not save processed image: {output_path}")
                 break
         else:

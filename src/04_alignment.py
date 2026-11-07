@@ -1,6 +1,8 @@
 from pathlib import Path
 
 import cv2
+
+import cv_io
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -8,7 +10,7 @@ import numpy as np
 # PATH SETUP
 # -------------------------------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
-DATASET_DIR = BASE_DIR / "Final Dataset"
+DATASET_DIR = BASE_DIR / "dataset"
 REFERENCE_PATH = BASE_DIR / "reference.jpg"
 RESULTS_DIR = BASE_DIR / "results"
 ALIGNED_DIR = RESULTS_DIR / "aligned_images"
@@ -57,7 +59,7 @@ def main():
     if not DATASET_DIR.is_dir():
         raise FileNotFoundError(f"Dataset folder not found: {DATASET_DIR}")
 
-    reference = cv2.imread(str(REFERENCE_PATH), cv2.IMREAD_COLOR)
+    reference = cv_io.imread(str(REFERENCE_PATH), cv2.IMREAD_COLOR)
     if reference is None:
         raise FileNotFoundError(f"Reference image not found: {REFERENCE_PATH}")
 
@@ -91,7 +93,7 @@ def main():
     failures = []
     for image_path in image_paths:
         relative_path = image_path.relative_to(DATASET_DIR)
-        image = cv2.imread(str(image_path), cv2.IMREAD_COLOR)
+        image = cv_io.imread(str(image_path), cv2.IMREAD_COLOR)
         if image is None:
             failures.append(f"Could not read image: {image_path}")
             continue
@@ -106,7 +108,7 @@ def main():
             )
             output_path = ALIGNED_DIR / relative_path
             output_path.parent.mkdir(parents=True, exist_ok=True)
-            if not cv2.imwrite(str(output_path), aligned):
+            if not cv_io.imwrite(str(output_path), aligned):
                 raise OSError(f"Could not save aligned image: {output_path}")
 
             previews.setdefault(relative_path.parent, (image_path.name, aligned))

@@ -1,6 +1,8 @@
 from pathlib import Path
 
 import cv2
+
+import cv_io
 import numpy as np
 import pandas as pd
 
@@ -10,7 +12,7 @@ from illumination_utils import normalize_illumination
 # PATH SETUP
 # -------------------------------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
-DATASET_DIR = BASE_DIR / "Final Dataset"
+DATASET_DIR = BASE_DIR / "dataset"
 REFERENCE_PATH = BASE_DIR / "reference.jpg"
 RESULTS_DIR = BASE_DIR / "results"
 ANNOTATED_DIR = RESULTS_DIR / "annotated_images"
@@ -63,7 +65,7 @@ DEFECT_COLUMNS = [
 # -------------------------------------------------------------------------
 def load_reference():
     """Load the reference PCB and prepare its reusable ORB descriptors."""
-    reference_color = cv2.imread(str(REFERENCE_PATH), cv2.IMREAD_COLOR)
+    reference_color = cv_io.imread(str(REFERENCE_PATH), cv2.IMREAD_COLOR)
     if reference_color is None:
         raise FileNotFoundError(f"Reference image not found: {REFERENCE_PATH}")
 
@@ -292,7 +294,7 @@ def main():
         }
 
         try:
-            image = cv2.imread(str(image_path), cv2.IMREAD_COLOR)
+            image = cv_io.imread(str(image_path), cv2.IMREAD_COLOR)
             if image is None:
                 raise OSError(f"Could not read image: {image_path}")
             summary_row["image_height"], summary_row["image_width"] = image.shape[:2]
@@ -334,7 +336,7 @@ def main():
 
             annotated_path = ANNOTATED_DIR / relative_path
             annotated_path.parent.mkdir(parents=True, exist_ok=True)
-            if not cv2.imwrite(str(annotated_path), output_image):
+            if not cv_io.imwrite(str(annotated_path), output_image):
                 raise OSError(f"Could not save annotated image: {annotated_path}")
             print(
                 f"{relative_path}: {len(defects)} defect(s), "

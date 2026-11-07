@@ -1,6 +1,8 @@
 from pathlib import Path
 
 import cv2
+
+import cv_io
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -78,7 +80,7 @@ def main():
             f"Trained feature report not found: {FEATURES_CSV_PATH}. "
             "Run 08_features.py and 09_train_svm.py first."
         )
-    reference = cv2.imread(str(REFERENCE_PATH), cv2.IMREAD_COLOR)
+    reference = cv_io.imread(str(REFERENCE_PATH), cv2.IMREAD_COLOR)
     if reference is None:
         raise FileNotFoundError(f"Reference image not found: {REFERENCE_PATH}")
 
@@ -139,7 +141,7 @@ def main():
                 image_features["predicted_defect_type"].mode().iloc[0]
             )
 
-        aligned = cv2.imread(str(image_path), cv2.IMREAD_COLOR)
+        aligned = cv_io.imread(str(image_path), cv2.IMREAD_COLOR)
         if aligned is None:
             summary["inspection_status"] = "ERROR"
             summary["error"] = f"Could not read aligned image: {image_path}"
@@ -159,7 +161,7 @@ def main():
         annotated = annotate_image(aligned, image_features)
         output_path = OUTPUT_DIR / relative_path
         output_path.parent.mkdir(parents=True, exist_ok=True)
-        if not cv2.imwrite(str(output_path), annotated):
+        if not cv_io.imwrite(str(output_path), annotated):
             summary["inspection_status"] = "ERROR"
             summary["error"] = f"Could not save annotated image: {output_path}"
             failures.append(summary["error"])

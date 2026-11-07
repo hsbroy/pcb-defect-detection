@@ -1,6 +1,8 @@
 from pathlib import Path
 
 import cv2
+
+import cv_io
 import matplotlib.pyplot as plt
 
 from illumination_utils import normalize_illumination
@@ -37,7 +39,7 @@ def compute_difference(reference, aligned):
 
 
 def main():
-    reference = cv2.imread(str(REFERENCE_PATH), cv2.IMREAD_GRAYSCALE)
+    reference = cv_io.imread(str(REFERENCE_PATH), cv2.IMREAD_GRAYSCALE)
     if reference is None:
         raise FileNotFoundError(f"Reference image not found: {REFERENCE_PATH}")
     if not ALIGNED_DIR.is_dir():
@@ -62,7 +64,7 @@ def main():
     processed_count = 0
     for image_path in image_paths:
         relative_path = image_path.relative_to(ALIGNED_DIR)
-        aligned = cv2.imread(str(image_path), cv2.IMREAD_GRAYSCALE)
+        aligned = cv_io.imread(str(image_path), cv2.IMREAD_GRAYSCALE)
         if aligned is None:
             failures.append(f"Could not read aligned image: {image_path}")
             continue
@@ -75,9 +77,9 @@ def main():
             difference_path.parent.mkdir(parents=True, exist_ok=True)
             mask_path.parent.mkdir(parents=True, exist_ok=True)
 
-            if not cv2.imwrite(str(difference_path), difference):
+            if not cv_io.imwrite(str(difference_path), difference):
                 raise OSError(f"Could not save difference image: {difference_path}")
-            if not cv2.imwrite(str(mask_path), defect_mask):
+            if not cv_io.imwrite(str(mask_path), defect_mask):
                 raise OSError(f"Could not save defect mask: {mask_path}")
 
             preview_by_folder.setdefault(
