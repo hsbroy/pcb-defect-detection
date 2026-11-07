@@ -8,9 +8,9 @@ import pandas as pd
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 # Reads the cleaned masks of the original setting (kernel 5x5).
-CLEAN_MASK_DIR = BASE_DIR / "results" / "kernel_size5" / "cleaned_masks"
-FEATURES_CSV_PATH = BASE_DIR / "results" / "features.csv"
-SUMMARY_CSV_PATH = BASE_DIR / "results" / "feature_summary.csv"
+CLEAN_MASK_DIR = BASE_DIR / "results" / "06_morphology" / "kernel_size5" / "cleaned_masks"
+FEATURES_CSV_PATH = BASE_DIR / "results" / "08_features" / "features.csv"
+SUMMARY_CSV_PATH = BASE_DIR / "results" / "08_features" / "feature_summary.csv"
 SUPPORTED_IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff"}
 FEATURE_COLUMNS = [
     "image_name",
@@ -184,6 +184,7 @@ def main():
         summary_rows.append(summary)
         print(f"{relative_image_path}: extracted {len(features)} defect feature(s)")
 
+    FEATURES_CSV_PATH.parent.mkdir(parents=True, exist_ok=True)
     pd.DataFrame(feature_rows, columns=FEATURE_COLUMNS).to_csv(
         FEATURES_CSV_PATH, index=False, encoding="utf-8-sig"
     )

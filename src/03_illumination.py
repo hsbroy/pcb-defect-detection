@@ -7,7 +7,7 @@ import cv_io
 # Resolve input and output locations relative to the project root.
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATASET_DIR = BASE_DIR / "dataset"
-PROCESSED_DIR = BASE_DIR / "results" / "illumination_processed_images"
+PROCESSED_DIR = BASE_DIR / "results" / "03_illumination"
 SUPPORTED_IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff"}
 
 

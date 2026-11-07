@@ -10,9 +10,11 @@ import pandas as pd
 BASE_DIR = Path(__file__).resolve().parent.parent
 # Usage: python src/07_components.py [kernel_size]   (default 5 = original setting)
 KERNEL_SIZE = int(sys.argv[1]) if len(sys.argv) > 1 else 5
-RESULT_DIR = BASE_DIR / "results" / f"kernel_size{KERNEL_SIZE}"
-CLEAN_MASK_DIR = RESULT_DIR / "cleaned_masks"
-OUTPUT_DIR = RESULT_DIR / "components" / "labeled_masks"
+RESULT_DIR = BASE_DIR / "results" / "07_components" / f"kernel_size{KERNEL_SIZE}"
+CLEAN_MASK_DIR = (
+    BASE_DIR / "results" / "06_morphology" / f"kernel_size{KERNEL_SIZE}" / "cleaned_masks"
+)
+OUTPUT_DIR = RESULT_DIR / "labeled_masks"
 DETAILS_CSV_PATH = RESULT_DIR / "component_details.csv"
 SUMMARY_CSV_PATH = RESULT_DIR / "component_summary.csv"
 SUPPORTED_IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff"}

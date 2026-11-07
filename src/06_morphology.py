@@ -6,8 +6,8 @@ import cv_io
 import matplotlib.pyplot as plt
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-RAW_MASK_DIR = BASE_DIR / "results" / "difference_images" / "defect_mask"
-RESULTS_DIR = BASE_DIR / "results"
+RAW_MASK_DIR = BASE_DIR / "results" / "05_difference" / "defect_mask"
+RESULTS_DIR = BASE_DIR / "results" / "06_morphology"
 # [Experiment parameter] Kernel sizes to compare. 5 is the author's original setting.
 KERNEL_SIZES = (3, 5, 7)
 SUPPORTED_IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff"}

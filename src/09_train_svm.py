@@ -9,8 +9,8 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-FEATURES_CSV_PATH = BASE_DIR / "results" / "features.csv"
-RESULTS_DIR = BASE_DIR / "results"
+FEATURES_CSV_PATH = BASE_DIR / "results" / "08_features" / "features.csv"
+RESULTS_DIR = BASE_DIR / "results" / "09_train_svm"
 MODEL_DIR = BASE_DIR / "models"
 MODEL_PATH = MODEL_DIR / "svm_defect_classifier.joblib"
 PREDICTIONS_CSV_PATH = RESULTS_DIR / "features_with_severity.csv"

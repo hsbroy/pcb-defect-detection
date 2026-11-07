@@ -12,7 +12,7 @@ import numpy as np
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATASET_DIR = BASE_DIR / "dataset"
 REFERENCE_PATH = BASE_DIR / "reference.jpg"
-RESULTS_DIR = BASE_DIR / "results"
+RESULTS_DIR = BASE_DIR / "results" / "04_alignment"
 ALIGNED_DIR = RESULTS_DIR / "aligned_images"
 PREVIEW_PATH = RESULTS_DIR / "alignment_preview.jpg"
 SUPPORTED_IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff"}

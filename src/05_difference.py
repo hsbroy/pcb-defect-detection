@@ -12,9 +12,9 @@ from illumination_utils import normalize_illumination
 # -------------------------------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
 REFERENCE_PATH = BASE_DIR / "reference.jpg"
-ALIGNED_DIR = BASE_DIR / "results" / "aligned_images"
-RESULTS_DIR = BASE_DIR / "results" / "difference_images"
-PREVIEW_PATH = BASE_DIR / "results" / "difference_preview.jpg"
+ALIGNED_DIR = BASE_DIR / "results" / "04_alignment" / "aligned_images"
+RESULTS_DIR = BASE_DIR / "results" / "05_difference"
+PREVIEW_PATH = RESULTS_DIR / "difference_preview.jpg"
 SUPPORTED_IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff"}
 DIFFERENCE_THRESHOLD = 30
 

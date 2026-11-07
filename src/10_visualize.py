@@ -7,11 +7,11 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-ALIGNED_DIR = BASE_DIR / "results" / "aligned_images"
-FEATURES_CSV_PATH = BASE_DIR / "results" / "features_with_severity.csv"
-OUTPUT_DIR = BASE_DIR / "results" / "final_visualizations" / "annotated_images"
-SUMMARY_CSV_PATH = BASE_DIR / "results" / "final_visualizations" / "inspection_summary.csv"
-PREVIEW_PATH = BASE_DIR / "results" / "final_inspection_preview.jpg"
+ALIGNED_DIR = BASE_DIR / "results" / "04_alignment" / "aligned_images"
+FEATURES_CSV_PATH = BASE_DIR / "results" / "09_train_svm" / "features_with_severity.csv"
+OUTPUT_DIR = BASE_DIR / "results" / "10_visualize" / "annotated_images"
+SUMMARY_CSV_PATH = BASE_DIR / "results" / "10_visualize" / "inspection_summary.csv"
+PREVIEW_PATH = BASE_DIR / "results" / "10_visualize" / "final_inspection_preview.jpg"
 REFERENCE_PATH = BASE_DIR / "reference.jpg"
 SUPPORTED_IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff"}
 REQUIRED_FEATURE_COLUMNS = {
