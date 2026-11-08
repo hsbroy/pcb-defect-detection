@@ -1,0 +1,196 @@
+# PCB Defect Detection Using Digital Image Processing and Machine Learning
+
+## Overview
+
+This project implements an automated Printed Circuit Board (PCB) defect detection and classification system using Digital Image Processing and Machine Learning techniques. The system compares a reference PCB image with a test image to identify potential manufacturing defects.
+
+The project combines image preprocessing, illumination correction, image alignment, difference detection, mathematical morphology, connected-component analysis, feature extraction, and Support Vector Machine (SVM) classification to build a modular PCB inspection pipeline.
+
+## Objectives
+
+- Automate PCB defect inspection using image processing.
+- Detect defective regions by comparing reference and test PCB images.
+- Reduce noise and illumination variations during preprocessing.
+- Refine defect regions using mathematical morphology.
+- Extract connected components and numerical features from candidate defects.
+- Apply SVM classification to support defect identification.
+- Provide a modular and reproducible inspection workflow.
+
+## Key Features
+
+- Reference-based PCB image comparison.
+- Image preprocessing and illumination correction.
+- Image alignment to improve comparison accuracy.
+- Difference-image generation for potential defect detection.
+- Morphological opening and closing operations.
+- Connected-component analysis.
+- Feature extraction for machine learning.
+- SVM model training and visualization of inspection results.
+
+## Project Workflow
+
+The system follows these main stages:
+
+1. **Image Acquisition:** Load reference and test PCB images.
+2. **Preprocessing:** Prepare images for subsequent analysis.
+3. **Illumination Correction:** Reduce the effect of intensity variations.
+4. **Image Alignment:** Align the test image with the reference image.
+5. **Difference Detection:** Identify discrepancies between the aligned images.
+6. **Morphological Processing:** Refine candidate defect regions using morphological operations.
+7. **Connected-Component Analysis:** Identify individual candidate regions.
+8. **Feature Extraction:** Calculate numerical descriptors from detected regions.
+9. **SVM Classification:** Train and evaluate a classifier using extracted features.
+10. **Visualization:** Display or save intermediate processing results and defect analysis outputs.
+
+## Technologies Used
+
+- **Python** — Core programming language
+- **OpenCV** — Image processing and computer vision
+- **NumPy** — Numerical computation
+- **Pandas** — Dataset and feature-table handling
+- **Matplotlib** — Image and result visualization
+- **scikit-learn** — SVM training and model evaluation
+
+## Project Structure
+
+```text
+pcb-defect-detection/
+├── dataset/
+│   ├── Open_circuit/
+│   ├── open_circuit_Rotation/
+│   ├── Short/
+│   ├── Short_Rotation/
+│   ├── Spurious_copper/
+│   └── Spurious_copper_rotation/
+├── models/
+├── results/
+├── src/
+│   ├── 01_view_image.py
+│   ├── 02_preprocess.py
+│   ├── 03_illumination.py
+│   ├── 04_alignment.py
+│   ├── 05_difference.py
+│   ├── 06_morphology.py
+│   ├── 07_components.py
+│   ├── 08_features.py
+│   ├── 09_train_svm.py
+│   ├── 10_visualize.py
+│   ├── illumination_utils.py
+│   └── pcb_inspection.py
+├── .gitignore
+├── LICENSE
+├── README.md
+└── requirements.txt
+```
+
+## Installation
+
+### Prerequisites
+
+- Python 3.10 or another version compatible with the project's dependencies.
+- Git.
+- pip package manager.
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Mitakshara-sri/pcb-defect-detection.git
+cd pcb-defect-detection
+```
+
+### 2. Create a virtual environment
+
+```bash
+python -m venv venv
+```
+
+Activate the environment on Windows:
+
+```powershell
+.\venv\Scripts\Activate.ps1
+```
+
+### 3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+## How to Run
+
+Run the scripts from the project root directory.
+
+The numbered scripts represent the main processing stages:
+
+| Script | Purpose |
+|---|---|
+| `01_view_image.py` | Load and inspect a PCB image |
+| `02_preprocess.py` | Preprocess the input image |
+| `03_illumination.py` | Correct illumination variations |
+| `04_alignment.py` | Align reference and test images |
+| `05_difference.py` | Generate image differences |
+| `06_morphology.py` | Refine defect regions |
+| `07_components.py` | Analyze connected components |
+| `08_features.py` | Extract numerical features |
+| `09_train_svm.py` | Train and evaluate the SVM classifier |
+| `10_visualize.py` | Visualize inspection results |
+
+For example, run the image inspection script using:
+
+```bash
+python src/01_view_image.py
+
+```
+
+Other scripts can be run similarly, provided their required inputs and dependencies are available.
+
+**Important:** Check each script's input paths and execution requirements before running the entire pipeline. The scripts may require reference images, intermediate outputs, dataset files, or a trained model generated by earlier stages.
+
+## Dataset
+
+The dataset contains PCB images organized into defect-related categories, including examples such as open circuits, shorts, and spurious copper, along with rotation variants.
+
+The dataset is used for image processing, feature extraction, and machine-learning experiments.
+
+Preserve the original folder names and ensure that the dataset paths in the code match the repository structure.
+
+## Results and Evaluation
+
+The system generates intermediate image-processing outputs that can be used to inspect image alignment, difference detection, morphological refinement, and candidate defect regions.
+
+The SVM training script can be used to evaluate classification performance using the available feature dataset.
+
+## Applications
+
+- PCB manufacturing quality control
+- Automated visual inspection
+- Electronic circuit board inspection
+- Manufacturing defect analysis
+- Industrial computer vision research
+
+## Limitations
+
+- Detection performance depends on image quality, alignment, and illumination conditions.
+- Incorrect input paths or missing intermediate outputs can interrupt the processing pipeline.
+- The classification performance depends on the quality, quantity, and labeling of the training data.
+- Generalization to unseen PCB designs and defect types requires further evaluation.
+
+## Future Scope
+
+- Evaluate the system on larger and more diverse PCB datasets.
+- Improve robustness to changes in lighting, rotation, and image quality.
+- Expand defect classification to additional categories.
+- Compare traditional image processing and SVM classification with deep-learning approaches.
+- Develop a real-time PCB inspection interface.
+- Integrate camera-based image acquisition for practical inspection.
+
+## Authors
+
+- [Priya Bhadoria](https://github.com/priyabhadoria)
+- [Mitakshara Srivastava](https://github.com/Mitakshara-sri)
+- [Alok Kumar Munna Lal Singh](https://github.com/Alok-Kumar-Singh235)
+
+
+## License
+
+This project is distributed under the MIT License. See the [LICENSE](LICENSE) file for details.
